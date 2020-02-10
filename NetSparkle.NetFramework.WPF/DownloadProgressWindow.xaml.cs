@@ -1,21 +1,9 @@
 ﻿using NetSparkle.Events;
 using NetSparkle.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NetSparkle.UI.NetFramework.WPF
 {
@@ -57,10 +45,10 @@ namespace NetSparkle.UI.NetFramework.WPF
             }
         }
 
-        public AppCastItem ItemToDownload 
-        { 
+        public AppCastItem ItemToDownload
+        {
             get { return _itemToDownload; }
-            set 
+            set
             {
                 _itemToDownload = value;
 
@@ -79,7 +67,7 @@ namespace NetSparkle.UI.NetFramework.WPF
         }
 
         /// <summary>
-        /// Event to fire when the download UI is complete; tells you 
+        /// Event to fire when the download UI is complete; tells you
         /// if the install process should happen or not
         /// </summary>
         public event DownloadInstallEventHandler DownloadProcessCompleted;

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+
+    <SolidColorBrush x:Key="MainBackground" Color="#FF191F24" />
+
+    <LinearGradientBrush x:Key="OrangeNormalBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#F8974E" />
+        <GradientStop Offset="1" Color="#ED7039" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MainButtonBorderBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#F48846" />
+        <GradientStop Offset="1" Color="#CC6131" />
+    </LinearGradientBrush>
+
+
+    <SolidColorBrush x:Key="GraOrangeIsMouseOverBackgroundBrush" Color="#ffffff" />
+    <SolidColorBrush x:Key="OrangeIsPressedBackgroundBrush" Color="#d2dee9" />
+    <SolidColorBrush x:Key="OrangeIsEnabledBackgroundBrush" Color="#e6eaed" />
+
+</ResourceDictionary>

@@ -8,6 +8,7 @@ using System.Threading;
 using System.IO;
 using NetSparkle.Enums;
 using System.Net;
+using System.Web;
 
 namespace NetSparkle
 {
@@ -68,6 +69,7 @@ namespace NetSparkle
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetHTMLReleaseNotes(castItem, _sparkle, cancellationToken);
+                releaseNotes = HttpUtility.HtmlDecode(releaseNotes);
                 sb.Append(string.Format(_separatorTemplate,
                                         castItem.Version,
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy

@@ -1085,6 +1085,11 @@ namespace NetSparkle
             ProgressWindow?.SetDownloadAndInstallButtonEnabled(true);
         }
 
+        /// <summary>
+        /// IsDownloadingItem
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool IsDownloadingItem(AppCastItem item)
         {
             return _itemBeingDownloaded?.DownloadDSASignature == item.DownloadDSASignature;

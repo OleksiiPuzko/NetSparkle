@@ -61,7 +61,7 @@ namespace NetSparkle.UI.NetFramework.WPF
         public Action<List<AppCastItem>> ClickAction { get; set; }
 
         public List<AppCastItem> Updates { get; set; }
-        
+
         private void PauseTimerTick(object sender, EventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -72,7 +72,7 @@ namespace NetSparkle.UI.NetFramework.WPF
             });
         }
 
-        void GoUpTimerTick(object sender, EventArgs e)
+        private void GoUpTimerTick(object sender, EventArgs e)
         {
             Dispatcher.InvokeAsync(() =>
             {

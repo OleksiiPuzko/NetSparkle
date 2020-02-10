@@ -1,14 +1,13 @@
-using System;
-using System.Drawing;
 using NetSparkle.Interfaces;
 using NetSparkle.Properties;
-using NetSparkle.Enums;
-using System.Windows.Media;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using System.Windows.Interop;
-using System.Threading;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Threading;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace NetSparkle.UI.NetFramework.WPF
 {
@@ -17,6 +16,13 @@ namespace NetSparkle.UI.NetFramework.WPF
     /// </summary>
     public class UIFactory : IUIFactory
     {
+        private string separatorTemplate = "<div style=\"border: #ccc 1px solid;\">" +
+            "<div style=\"background: {3}; padding: 5px;\">" +
+            "<span style=\"float: right; display:float;\">" +
+                    "{1}</span>{0}</div><div style=\"padding: 5px; color: white; \">{2}</div></div><br>";
+
+        private string htmlHeadAddition = "<style>body { background-color: #24292F;  overflow: auto;  scrollbar-base-color: #F2F2F2; }</style>";
+
         /// <summary>
         /// Create sparkle form implementation
         /// </summary>
@@ -30,7 +36,7 @@ namespace NetSparkle.UI.NetFramework.WPF
             {
                 Icon = ToImageSource(applicationIcon)
             };
-            window.Initialize(sparkle, updates, isUpdateAlreadyDownloaded);
+            window.Initialize(sparkle, updates, isUpdateAlreadyDownloaded, separatorTemplate, htmlHeadAddition);
             return window;
         }
 
@@ -92,7 +98,7 @@ namespace NetSparkle.UI.NetFramework.WPF
         /// <param name="applicationIcon">The icon to display</param>
         public virtual void ShowUnknownInstallerFormatMessage(string downloadFileName, Icon applicationIcon = null)
         {
-            ShowMessage(Resources.DefaultUIFactory_MessageTitle, 
+            ShowMessage(Resources.DefaultUIFactory_MessageTitle,
                 string.Format(Resources.DefaultUIFactory_ShowUnknownInstallerFormatMessageText, downloadFileName), applicationIcon);
         }
 

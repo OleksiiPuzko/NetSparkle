@@ -1,28 +1,21 @@
-﻿using NetSparkle.Enums;
+﻿using Infrastructure;
+using NetSparkle.Enums;
 using NetSparkle.Events;
 using NetSparkle.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace NetSparkle.UI.NetFramework.WPF
 {
     /// <summary>
     /// Interaction logic for UpdateAvailableWindow.xaml
     /// </summary>
-    public partial class UpdateAvailableWindow : Window, IUpdateAvailable
+    public partial class UpdateAvailableWindow : Window, IUpdateAvailable, INotifyPropertyChanged
     {
         private Sparkle _sparkle;
         private List<AppCastItem> _updates;
@@ -35,6 +28,7 @@ namespace NetSparkle.UI.NetFramework.WPF
         private bool _hasInitiatedShutdown;
 
         private UpdateAvailableResult _userResponse;
+        private string releaseNotesHtml;
 
         public UpdateAvailableWindow()
         {
@@ -96,7 +90,14 @@ namespace NetSparkle.UI.NetFramework.WPF
             _cancellationTokenSource = new CancellationTokenSource();
             _cancellationToken = _cancellationTokenSource.Token;
 
-            ReleaseNotesBrowser.NavigateToString(_releaseNotesGrabber.GetLoadingText());
+            DispatcherHelper.BeginInvoke(
+                        DispatcherPriority.Background,
+                        () =>
+                        {
+                            ReleaseNotesHtml = _releaseNotesGrabber.GetLoadingText();
+                            ReleaseNotesBrowser.Visibility = Visibility.Visible;
+                        });
+
             LoadReleaseNotes(items);
         }
 
@@ -104,11 +105,14 @@ namespace NetSparkle.UI.NetFramework.WPF
         {
             AppCastItem latestVersion = items.OrderByDescending(p => p.Version).FirstOrDefault();
             string releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotesAsHTML(items, latestVersion, _cancellationToken);
-            ReleaseNotesBrowser.Dispatcher.Invoke(() =>
-            {
-                // see https://stackoverflow.com/a/15209861/3938401
-                ReleaseNotesBrowser.NavigateToString(releaseNotes);
-            });
+
+            DispatcherHelper.BeginInvoke(
+                        DispatcherPriority.Background,
+                        () =>
+                        {
+                            ReleaseNotesHtml = releaseNotes;
+                            ReleaseNotesBrowser.Visibility = Visibility.Visible;
+                        });
         }
 
         UpdateAvailableResult IUpdateAvailable.Result => _userResponse;
@@ -118,6 +122,15 @@ namespace NetSparkle.UI.NetFramework.WPF
         public AppCastItem CurrentItem
         {
             get { return _updates.Count() > 0 ? _updates[0] : null; }
+        }
+
+        public string ReleaseNotesHtml
+        {
+            get => releaseNotesHtml; set
+            {
+                releaseNotesHtml = value;
+                RaisePropertyChanged(nameof(this.ReleaseNotesHtml));
+            }
         }
 
         public event UserRespondedToUpdate UserResponded;
@@ -215,6 +228,14 @@ namespace NetSparkle.UI.NetFramework.WPF
         private void DownloadInstallButton_Click(object sender, RoutedEventArgs e)
         {
             SendResponse(UpdateAvailableResult.InstallUpdate);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
