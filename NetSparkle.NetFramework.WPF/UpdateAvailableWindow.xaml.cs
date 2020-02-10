@@ -1,5 +1,4 @@
-﻿using Infrastructure;
-using NetSparkle.Enums;
+﻿using NetSparkle.Enums;
 using NetSparkle.Events;
 using NetSparkle.Interfaces;
 using System;

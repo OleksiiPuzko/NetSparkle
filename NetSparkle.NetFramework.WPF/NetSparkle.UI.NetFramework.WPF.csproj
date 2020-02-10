@@ -53,6 +53,7 @@
     <Compile Include="CheckingForUpdatesWindow.xaml.cs">
       <DependentUpon>CheckingForUpdatesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DispatcherHelper.cs" />
     <Compile Include="DownloadProgressWindow.xaml.cs">
       <DependentUpon>DownloadProgressWindow.xaml</DependentUpon>
     </Compile>
@@ -70,10 +71,6 @@
     <Compile Include="WebBrowserHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Miranda\Common\Infrastructure\Infrastructure.csproj">
-      <Project>{171ED908-2418-4B15-A167-53D6B82A6861}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NetSparkle\NetSparkle.csproj">
       <Project>{74635a21-2bad-4522-ab95-e3e5703cd301}</Project>
       <Name>NetSparkle</Name>
