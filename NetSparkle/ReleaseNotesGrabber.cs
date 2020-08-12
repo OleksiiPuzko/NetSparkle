@@ -38,7 +38,7 @@ namespace NetSparkle
             _separatorTemplate =
                 !string.IsNullOrEmpty(separatorTemplate) ?
                     separatorTemplate :
-                    "<div style=\"border: #ccc 1px solid;\"><div style=\"background: {3}; padding: 5px;\"><span style=\"float: right; display:float;\">" +
+                    "<div style=\"border: #ccc 1px solid;\"><div style=\"background: {3}; padding: 5px; color: {4}; font-family: Helvetica, Arial, sans-serif;\"><span style=\"float: right; display:float;\">" +
                     "{1}</span>{0}</div><div style=\"padding: 5px;\">{2}</div></div><br>";
             _initialHTML = "<html><head><meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>" + htmlHeadAddition + "</head><body>";
             _sparkle = sparkle;
@@ -74,7 +74,8 @@ namespace NetSparkle
                                         castItem.Version,
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
                                         releaseNotes,
-                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF"));
+                                        latestVersion.Version.Equals(castItem.Version) ? "#ED7039" : "#AFD7FF",
+                                        latestVersion.Version.Equals(castItem.Version) ? "white" : "black"));
             }
             sb.Append("</body>");
 

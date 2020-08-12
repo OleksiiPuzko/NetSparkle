@@ -35,13 +35,13 @@
         <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
                Source="{Binding ElementName=UpdateAvailableWindowControl, Path=Icon}"
                VerticalAlignment="Top"
-               HorizontalAlignment="Left" Width="48" Height="48" Margin="10,10,0,0"/>
+               HorizontalAlignment="Left" Width="32" Height="32" Margin="10,10,0,0"/>
         <TextBlock 
             Name="TitleHeader"
             Style="{DynamicResource TitleTextStyle}"
             TextWrapping="Wrap"
             FontSize="16"
-            Margin="10,5,0,0"
+            Margin="10,10,0,0"
             Grid.Column="1"
             Grid.Row="0"/>
         <TextBlock
@@ -49,7 +49,7 @@
              Style="{DynamicResource InfoTextStyle}"
             FontSize="14"
             TextWrapping="Wrap"
-            Margin="10,5,0,0"
+            Margin="10,5,0,5"
             Grid.Column="1"
             Grid.Row="1"/>
         <WebBrowser Name="ReleaseNotesBrowser"

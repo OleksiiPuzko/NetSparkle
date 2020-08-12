@@ -17,7 +17,7 @@ namespace NetSparkle.UI.NetFramework.WPF
     public class UIFactory : IUIFactory
     {
         private string separatorTemplate = "<div style=\"border: #ccc 1px solid;\">" +
-            "<div style=\"background: {3}; padding: 5px;\">" +
+            "<div style=\"background: {3}; padding: 5px; color: {4}; font-family: Helvetica, Arial, sans-serif;\">" +
             "<span style=\"float: right; display:float;\">" +
                     "{1}</span>{0}</div><div style=\"padding: 5px; color: white; \">{2}</div></div><br>";
 
