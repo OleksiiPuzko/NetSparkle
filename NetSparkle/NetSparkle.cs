@@ -149,6 +149,8 @@ namespace NetSparkle
         private bool _disposed;
         private bool _checkServerFileName = true;
 
+        private string externalMsiInstallerPath;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Sparkle"/> class with the given appcast URL.
         /// </summary>
@@ -476,6 +478,12 @@ namespace NetSparkle
                 }
                 return false;
             }
+        }
+
+        public string ExternalMsiInstallerPath
+        {
+            get => this.externalMsiInstallerPath;
+            set => this.externalMsiInstallerPath = value;
         }
 
         #endregion
@@ -1117,6 +1125,10 @@ namespace NetSparkle
             }
             if (".msi".Equals(installerExt, StringComparison.CurrentCultureIgnoreCase))
             {
+                if (!string.IsNullOrEmpty(ExternalMsiInstallerPath) && new FileInfo(ExternalMsiInstallerPath).Exists)
+                {
+                    return ExternalMsiInstallerPath + " " + downloadFilePath + "\"";
+                }
                 // buid the command line
                 return "msiexec /i \"" + downloadFilePath + "\"";
             }
