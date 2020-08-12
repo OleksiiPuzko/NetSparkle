@@ -113,21 +113,19 @@ namespace NetSparkle.UI.NetFramework.WPF
         /// <summary>
         /// Event called when the client download progress changes
         /// </summary>
-        private void OnDownloadProgressChanged(object sender, long bytesReceived, long totalBytesToReceive, int percentage)
+        private void OnDownloadProgressChanged(object sender, int percentage)
         {
             Dispatcher.InvokeAsync(() =>
             {
                 ProgressBar.Value = percentage;
-                DownloadProgress.Content = string.Format("({0} / {1})",
-                    Utilities.NumBytesToUserReadableString(bytesReceived),
-                    Utilities.NumBytesToUserReadableString(totalBytesToReceive));
+                DownloadProgress.Content = percentage + "%";
             });
         }
 
         void IDownloadProgress.OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             _didDownloadAnything = true;
-            OnDownloadProgressChanged(sender, e.BytesReceived, e.TotalBytesToReceive, e.ProgressPercentage);
+            OnDownloadProgressChanged(sender, e.ProgressPercentage);
         }
 
         void IDownloadProgress.SetDownloadAndInstallButtonEnabled(bool shouldBeEnabled)
