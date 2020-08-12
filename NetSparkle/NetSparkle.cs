@@ -149,7 +149,8 @@ namespace NetSparkle
         private bool _disposed;
         private bool _checkServerFileName = true;
 
-        private string externalMsiInstallerPath;
+        private string _externalMsiInstallerPath;
+        private string _externalMsiInstallerUrl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sparkle"/> class with the given appcast URL.
@@ -482,8 +483,14 @@ namespace NetSparkle
 
         public string ExternalMsiInstallerPath
         {
-            get => this.externalMsiInstallerPath;
-            set => this.externalMsiInstallerPath = value;
+            get => this._externalMsiInstallerPath;
+            set => this._externalMsiInstallerPath = value;
+        }
+
+        public string ExternalMsiInstallerUrl
+        {
+            get => this._externalMsiInstallerUrl;
+            set => this._externalMsiInstallerUrl = value;
         }
 
         #endregion
@@ -1050,6 +1057,11 @@ namespace NetSparkle
                 if (await AskApplicationToSafelyCloseUp())
                 {
                     ProgressWindow?.Close();
+                    if (!string.IsNullOrEmpty(ExternalMsiInstallerUrl))
+                    {
+                        this.ExternalMsiInstallerPath = GetExternalUpdater();
+                    }
+
                     await RunDownloadedInstaller(_downloadTempFileName);
                 }
                 else
@@ -1062,6 +1074,23 @@ namespace NetSparkle
                 CancelFileDownload();
                 ProgressWindow?.Close();
             }
+        }
+
+        private string GetExternalUpdater()
+        {
+            var updaterPath = Path.GetTempPath() + @"Updater.exe";
+
+            try
+            {
+                var client = new WebClient();
+                client.DownloadFile(new Uri(ExternalMsiInstallerUrl), updaterPath);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+
+            return updaterPath;
         }
 
         /// <summary>
@@ -1127,7 +1156,7 @@ namespace NetSparkle
             {
                 if (!string.IsNullOrEmpty(ExternalMsiInstallerPath) && new FileInfo(ExternalMsiInstallerPath).Exists)
                 {
-                    return ExternalMsiInstallerPath + " " + downloadFilePath + "\"";
+                    return "\"" + ExternalMsiInstallerPath + "\" \"" + downloadFilePath + "\"";
                 }
                 // buid the command line
                 return "msiexec /i \"" + downloadFilePath + "\"";
