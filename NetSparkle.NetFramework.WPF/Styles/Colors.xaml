@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     >
 
-    <SolidColorBrush x:Key="MainBackground" Color="#FF191F24" />
+    <SolidColorBrush x:Key="MainBackground" Color="Transparent" />
 
     <LinearGradientBrush x:Key="OrangeNormalBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Offset="0" Color="#F8974E" />

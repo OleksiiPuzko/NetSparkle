@@ -74,7 +74,7 @@ namespace NetSparkle
                                         castItem.Version,
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
                                         releaseNotes,
-                                        latestVersion.Version.Equals(castItem.Version) ? "#ED7039" : "#AFD7FF",
+                                        latestVersion.Version.Equals(castItem.Version) ? "#ED3984" : "#AFD7FF",
                                         latestVersion.Version.Equals(castItem.Version) ? "white" : "black"));
             }
             sb.Append("</body>");

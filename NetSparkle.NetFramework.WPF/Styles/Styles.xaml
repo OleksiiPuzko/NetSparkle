@@ -28,45 +28,16 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <Style x:Key="OrangeFlatButtonStyle" TargetType="Button">
+    <Style x:Key="OrangeFlatButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="MarkPro-Medium" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Height" Value="29" />
         <Setter Property="MinWidth" Value="89" />
         <Setter Property="MaxWidth" Value="189" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border
-                        x:Name="Body"
-                        Background="{DynamicResource OrangeNormalBackgroundBrush}"
-                        BorderBrush="White"
-                        BorderThickness="0">
-                        <ContentPresenter
-                            Margin="10,0,10,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Body" Property="Background" Value="{DynamicResource OrangeIsMouseOverBackgroundBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Body" Property="Background" Value="{DynamicResource OrangeIsPressedBackgroundBrush}" />
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Body" Property="Background" Value="{DynamicResource OrangeIsEnabledBackgroundBrush}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="#ED3984"/>
     </Style>
 
     <Style x:Key="MainGridStyle" TargetType="{x:Type Grid}">

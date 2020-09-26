@@ -4,20 +4,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:NetSparkle.UI.NetFramework.WPF"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d" 
         Width="600" Height="220"
         Title="Software Update"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow" 
         Name="DownloadProgressWindowControl"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        fw:AcrylicWindow.Enabled="True" 
+        fw:AcrylicWindow.NoiseOpacity="0.005"
+        fw:AcrylicWindow.TintColor="#1C2C30"
+        fw:AcrylicWindow.FallbackColor="#CD1C2C30"
+        fw:AcrylicWindow.TintOpacity="0.8">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/NetSparkle.UI.NetFramework.WPF;component/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <fw:AcrylicWindow.TitleBar>
+        <TextBlock Text="ClearVPN Beta"
+                   VerticalAlignment="Center"
+                   Foreground="White"
+                   Margin="8,0,0,0"/>
+    </fw:AcrylicWindow.TitleBar>
     <Grid Style="{DynamicResource MainGridStyle}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -47,14 +60,16 @@
         </Grid>
 
         <ProgressBar Name="ProgressBar" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top"
-                     Foreground="#ED7039"
+                     Foreground="#ED3984"
                      IsIndeterminate="False" Height="30" />
         <TextBlock Style="{DynamicResource BaseTextStyle}" TextWrapping="Wrap" Name="ErrorMessage" Grid.Row="2" Grid.Column="1" Margin="5,35,0,5"
                    Grid.ColumnSpan="2"
                    Text="I am an error" HorizontalAlignment="Left" FontWeight="Regular" FontSize="16"/>
         <Button Name="ActionButton" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"
-                Content="Cancel" FontSize="16" Width="180"
+                FontSize="16" Width="180"
                 Style="{DynamicResource OrangeFlatButtonStyle}"
-                Click="ActionButton_Click"/>
+                Click="ActionButton_Click">
+            <TextBlock>Cancel</TextBlock>
+        </Button>
     </Grid>
 </Window>
