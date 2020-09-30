@@ -23,12 +23,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <fw:AcrylicWindow.TitleBar>
-        <TextBlock Text="ClearVPN Beta"
-                   VerticalAlignment="Center"
-                   Foreground="White"
-                   Margin="8,0,0,0"/>
-    </fw:AcrylicWindow.TitleBar>
     <Grid Style="{DynamicResource MainGridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

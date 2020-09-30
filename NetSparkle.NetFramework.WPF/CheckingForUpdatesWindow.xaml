@@ -29,7 +29,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <fw:AcrylicWindow.TitleBar>
-        <TextBlock Text="ClearVPN Beta"
+        <TextBlock Text="Software Update"
                    VerticalAlignment="Center"
                    Foreground="White"
                    Margin="8,0,0,0"/>
