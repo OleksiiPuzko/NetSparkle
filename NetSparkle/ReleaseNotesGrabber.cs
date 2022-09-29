@@ -8,7 +8,6 @@ using System.Threading;
 using System.IO;
 using NetSparkle.Enums;
 using System.Net;
-using System.Web;
 
 namespace NetSparkle
 {
